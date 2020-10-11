@@ -1,2 +1,3 @@
 # taalpaint
-Paint program written in Python using tkinter
+Taal Paint
+a drawing/painting program written in Python using tkinter
