@@ -1,81 +1,167 @@
+import tkinter
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog
+from tkinter import ttk
 
-window = Tk()
-window.title( "Paint" )
+window=tkinter.Tk()
+window.title("TAAL Paint")
 
-# Heading
-frame=LabelFrame(window,text="Painting Program",font=" bold 32 italic",bd=5,relief=GROOVE,bg="light grey")
-frame.pack(side="top",fill=BOTH)
-label=Label(frame,text="RED  ,  GREEN  ,  BLUE  ",font="arial 20 bold")
-label.pack()
 
-# Screen
-canvas = Canvas(window,width=600,height=480,bg="white")
-canvas.pack(expand = YES, fill = BOTH)
 
-# Different Colours
+#def new_tab(event):
+#    tab=ttk.Frame(tab_control)
+#    tab_control.add(tab,text="Untitled File")
+#    tab_control.pack(expand="yes",fill="both")
+#    canvas=tkinter.Canvas(tab,bg="white")
+#    canvas.pack(expand="yes",fill="both")
+
+def save_file():
+    filedialog.asksaveasfile(mode="w")
+
+def open_file():
+    result=filedialog.askopenfile(title="Select File Directory")
+    for i in result:
+        print(i)
+
+def close():
+    exit()
+
+def help():
+    tkinter.messagebox.showinfo("Help","Muhammad Asad Ullah")
+
+def dev_info():
+    tkinter.messagebox.showinfo("Developer's Information","This Program is Developed By TAAL")
+
+main_menu=tkinter.Menu(window,tearoff=0)
+
+file_menu=tkinter.Menu(main_menu,tearoff=0)
+
+file_menu.add_command(label="New File")
+
+file_menu.add_command(label="Open File",command=open_file)
+
+file_menu.add_command(label="Save File",command=save_file)
+
+file_menu.add_separator()
+
+file_menu.add_command(label="Exit",command=close)
+
+main_menu.add_cascade(label="File",menu=file_menu)
+
+main_menu.add_command(label="Help",command=help)
+
+main_menu.add_separator()
+
+main_menu.add_command(label="About",command=dev_info)
+
+icon_frame=tkinter.Frame(window)
+icon_frame.pack(fill="both")
+
+new_file=tkinter.Button(icon_frame,text="New File")
+new_file.pack(side="left")
+
+open_file=tkinter.Button(icon_frame,text="Open File",command=open_file)
+open_file.pack(side="left")
+
+save_file=tkinter.Button(icon_frame,text="Save File",command=save_file)
+save_file.pack(side="left")
+
+exit_file=tkinter.Button(icon_frame,text="Exit",command=close)
+exit_file.pack(side="right")
+
+#tab_control=ttk.Notebook(window)
+
+#tab=ttk.Frame(tab_control)
+
+#tab_control.add(tab,text="Untitled File")
+#tab_control.pack(expand="yes",fill="both")
+
+canvas=tkinter.Canvas(window,bg="white")
+canvas.pack(expand="yes",fill="both")
+
+tool_frame=tkinter.LabelFrame(window,text="Tools")
+tool_frame.pack(fill="both")
+
+def clrscr():
+    canvas.delete("all")
+
 color = 0
-def color_red(event):
+
+def color_red():
     global color
     color = "red"
 
-def color_green(event):
+def color_green():
     global color
     color = "green"
 
-def color_blue(event):
+def color_blue():
     global color
     color = "blue"
 
-# Movement
-def paint_1(event):
+def pen(event):
     x1=event.x
     y1=event.y
     x2=event.x
     y2=event.y
     canvas.create_oval(x1,y1,x2,y2,fill=color)
 
-def paint_2(event):
-    x1=event.x
-    y1=event.y
-    x2=event.x
-    y2=event.y
-    canvas.create_oval(x1,y1,x2,y2,fill=color)
-
-def paint_3(event):
-    x1=event.x
-    y1=event.y
-    x2=event.x
-    y2=event.y
-    canvas.create_oval(x1,y1,x2,y2,fill=color)
-
-# Buttons
-button1 = Button(window,text="red",width=4,height=2,font=" bold 16 italic",bg="Red",fg="white")
-button1.bind("<Button-1>",color_red)
-canvas.bind("<B1-Motion>",paint_1)
+button1=tkinter.Button(window,text="Red",bg="red",fg="white",command=color_red)
+canvas.bind("<B1-Motion>",pen)
 button1.pack(side="left")
 
-button2 = Button(window,text="green",width=4,height=2,font=" bold 16 italic",bg="Green",fg="white")
-button2.bind("<Button-1>",color_green)
-canvas.bind("<B1-Motion>",paint_2)
+button2=tkinter.Button(window,text="Green",bg="green",fg="white",command=color_green)
+canvas.bind("<B1-Motion>",pen)
 button2.pack(side="left")
 
-button3 = Button(window,text="blue",width=4,height=2,font=" bold 16 italic",bg="Blue",fg="white")
-button3.bind("<Button-1>",color_blue)
-canvas.bind("<B1-Motion>",paint_3)
+button3=tkinter.Button(window,text="Blue",bg="blue",fg="white",command=color_blue)
+canvas.bind("<B1-Motion>",pen)
 button3.pack(side="left")
 
-# Developers Information
-def dev_info():
-    messagebox.showinfo("Developer's Information","This Program is made by Muhammad Talha.")
+clear_screen=tkinter.Button(tool_frame,text="Clear Screen",command=clrscr)
+clear_screen.pack(side="left")
 
-button5 = Button(window,text="Developer Information",width=18,font=" bold 16 italic",bg="dark blue",fg="white",command=dev_info)
-button5.pack(side="right")
+window.config(menu=main_menu)
 
+#from PIL import ImageTk,Image
 
-def close(event):
-    exit()
-canvas.bind("<Double-Button-1>",close)
+#img=ImageTk.PhotoImage(Image.open("unnamed.jpg"))
+#my_label=Label(exit_file,image=img)
+#my_label.pack()
+
+#img=ImageTk.PhotoImage(Image.open("unnamed.png"))
+#my_label=Label(open_file,image=img)
+#my_label.pack()
+
+#window.bind("<Control_L><n>")
+#window.bind("<Control_R><n>")
+#window.bind("<Control_L><N>")
+#window.bind("<Control_R><N>")
+
+#window.bind("<Control_L><o>")
+#window.bind("<Control_R><o>")
+#window.bind("<Control_L><O>")
+#window.bind("<Control_R><O>")
+
+#window.bind("<Control_L><s>")
+#window.bind("<Control_R><s>")
+#window.bind("<Control_L><S>")
+#window.bind("<Control_R><S>")
+
+#window.bind("<Control_L><d>")
+#window.bind("<Control_R><d>")
+#window.bind("<Control_L><D>")
+#window.bind("<Control_R><D>")
+
+#window.bind("<Control_L><q>",close)
+#window.bind("<Control_R><q>",close)
+#window.bind("<Control_L><Q>",close)
+#window.bind("<Control_R><Q>",close)
+
+#window.bind("<Alt_L><F4>",close)
+#window.bind("<Alt_R><F4>",close)
+#window.bind("<Alt_L><F4>",close)
+#window.bind("<Alt_R><F4>",close)
 
 window.mainloop()
