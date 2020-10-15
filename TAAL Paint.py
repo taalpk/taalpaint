@@ -20,8 +20,9 @@ def text():
     TX.pack(side="right",expand="yes")
     tkinter.messagebox.askyesnocancel("Text","Do you want to save file?")
 
-S = tkinter.Scale(window,orient="vertical")
-S.pack(side="left")
+S = tkinter.Scale(window,orient="vertical",from_=30,to=0,tickinterval=2)
+S.pack(side="left",fill="y")
+S.get()
 #def Scale():
 #    S = tkinter.Scale(window,orient="vertical")
 #    S.pack(side="left")
@@ -41,7 +42,7 @@ def close():
     exit()
 
 def help():
-    tkinter.messagebox.showinfo("Help","Muhammad Asad Ullah")
+    tkinter.messagebox.showinfo("Help 1122")
 
 def dev_info():
     tkinter.messagebox.showinfo("Developer's Information","This Program is Developed By TAAL")
