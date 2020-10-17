@@ -53,7 +53,7 @@ img2=ImageTk.PhotoImage(Image.open("folder-icon.png"))
 icon2 = Button(iconbar,text="",image=img2,command=open_file)
 icon2.pack(side="left")
 
-img3=ImageTk.PhotoImage(Image.open("save_icon.png"))
+img3=ImageTk.PhotoImage(Image.open("floppy_icon.png"))
 icon3 = Button(iconbar,text="",image=img3,command=save_file)
 icon3.pack(side="left")
 
