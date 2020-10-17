@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
+from PIL import Image,ImageTk
 
 window=Tk()
 window.title("TAAL Paint")
@@ -44,11 +45,16 @@ window.config(menu=main_menu)
 iconbar = LabelFrame(window,text="IconBar",bd=4,relief=RIDGE)
 iconbar.pack(side="top",fill="both")
 
-icon1 = Button(iconbar,text="New")
+img1=ImageTk.PhotoImage(Image.open("file_icon.png"))
+icon1 = Button(iconbar,text="",image=img1)
 icon1.pack(side="left")
-icon2 = Button(iconbar,text="Open",command=open_file)
+
+img2=ImageTk.PhotoImage(Image.open("folder-icon.png"))
+icon2 = Button(iconbar,text="",image=img2,command=open_file)
 icon2.pack(side="left")
-icon3 = Button(iconbar,text="Save",command=save_file)
+
+img3=ImageTk.PhotoImage(Image.open("save_icon.png"))
+icon3 = Button(iconbar,text="",image=img3,command=save_file)
 icon3.pack(side="left")
 
 scale = Scale(window,from_=20,to=0,orient='vertical',tickinterval=1)
