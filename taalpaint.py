@@ -5,14 +5,17 @@ from PIL import Image,ImageTk
 
 window=Tk()
 window.title("TAAL Paint")
-
+my_image=None
 def close():
     exit()
 
 def open_file():
-    result=filedialog.askopenfile(title="Select File Directory")
-    for i in result:
-        print(i)
+    global my_image
+    filename=filedialog.askopenfilename(initialdir="D:",title="select a file",filetypes=(("text files","*.txt"),("Python files",".py"),("all files","*.*")))
+    pic=Image.open(filename)
+    resized_pic=pic.resize((800,600))
+    my_image=ImageTk.PhotoImage(resized_pic)
+    my_image_label=Label(canvas,image=my_image).pack()
 
 def save_file():
     f=filedialog.asksaveasfile(mode="w",filetypes=(("text files",".txt"),("all files",".*")))
