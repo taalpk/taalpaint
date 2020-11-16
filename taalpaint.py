@@ -11,18 +11,17 @@ def close():
 
 def open_file():
     global my_image
-    filename=filedialog.askopenfilename(initialdir="D:",title="select a file",filetypes=(("text files","*.txt"),("Python files",".py"),("all files","*.*")))
+    filename=filedialog.askopenfilename(title="select a file",filetypes=(("Jpeg files",".jpg"),("png files",".png"),("all files","*.*")))
     pic=Image.open(filename)
     resized_pic=pic.resize((800,600))
     my_image=ImageTk.PhotoImage(resized_pic)
     my_image_label=Label(canvas,image=my_image).pack()
 
 def save_file():
-    f=filedialog.asksaveasfile(mode="w",filetypes=(("text files",".txt"),("all files",".*")))
-    file = input("enter lines : ")
-    f.write(file)
-    f.close()
-
+    filename=filedialog.asksaveasfilename(title="save as",filetypes=(("postscript_files",".ps"),("all_files","*.*")))
+    canvas.update()
+    canvas.postscript(file=filename+".ps", colormode='color')
+    
 def help():
     messagebox.showinfo("Help","Call 1122")
 
